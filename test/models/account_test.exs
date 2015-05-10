@@ -3,7 +3,7 @@ defmodule DrinkMe.AccountTest do
 
   alias DrinkMe.Account
 
-  @valid_attrs %{aws_access_id: "some content", aws_secret_key: "some content", name: "some content"}
+  @valid_attrs %{aws_access_id: "some content", aws_secret_key: "some content", email: "test@example.com"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
