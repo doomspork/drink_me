@@ -29,6 +29,4 @@ config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :drink_me, DrinkMe.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
   database: "drink_me_dev"

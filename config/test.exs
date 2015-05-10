@@ -12,8 +12,6 @@ config :logger, level: :warn
 # Configure your database
 config :drink_me, DrinkMe.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
   database: "drink_me_test",
   size: 1,
   max_overflow: 0
