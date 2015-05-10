@@ -1,6 +1,6 @@
 ![DrinkMe](http://vignette4.wikia.nocookie.net/restaurantcity/images/3/3b/Drink-me.png)
 
-# DrinkMe
+A service for manipulating images.
 
 ## Getting Started
 
