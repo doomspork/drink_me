@@ -7,7 +7,7 @@ A service for manipulating images.
 Install the project dependencies:
 
 ```elixir
-mix deps
+mix deps.get
 ```
 
 Setup the database:
