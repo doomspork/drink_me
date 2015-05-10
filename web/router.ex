@@ -22,6 +22,7 @@ defmodule DrinkMe.Router do
     pipe_through :api
 
     resources "accounts", AccountController
+    post "images", ImageController, :create
   end
 
 end
