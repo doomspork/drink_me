@@ -12,20 +12,22 @@ defmodule DrinkMe.AccountControllerTest do
 
   test "GET /accounts", %{conn: conn} do
     conn = get conn, account_path(conn, :index)
-    assert json_response(conn, 200)["data"] == []
+    assert json_response(conn, 200)["account"] == []
   end
 
   test "GET /accounts/:id", %{conn: conn} do
     account = Repo.insert %Account{}
     conn = get conn, account_path(conn, :show, account)
-    assert json_response(conn, 200)["data"] == %{
-      "id" => account.id
+    assert json_response(conn, 200)["account"] == %{
+      "id" => account.id,
+      "name" => account.name,
+      "access_id" => account.aws_access_id
     }
   end
 
   test "POST /accounts with valid data", %{conn: conn} do
     conn = post conn, account_path(conn, :create), @valid_params
-    assert json_response(conn, 200)["data"]["id"]
+    assert json_response(conn, 200)["account"]["id"]
   end
 
   test "POST /accounts with invalid data", %{conn: conn} do
@@ -36,7 +38,7 @@ defmodule DrinkMe.AccountControllerTest do
   test "PUT /accounts/:id with valid data", %{conn: conn} do
     account = Repo.insert %Account{}
     conn = put conn, account_path(conn, :update, account), @valid_params
-    assert json_response(conn, 200)["data"]["id"]
+    assert json_response(conn, 200)["account"]["id"]
   end
 
   test "PUT /accounts/:id with invalid data", %{conn: conn} do
@@ -48,7 +50,7 @@ defmodule DrinkMe.AccountControllerTest do
   test "DELETE /accounts/:id", %{conn: conn} do
     account = Repo.insert %Account{}
     conn = delete conn, account_path(conn, :delete, account)
-    assert json_response(conn, 200)["data"]["id"]
+    assert json_response(conn, 200)["account"]["id"]
     refute Repo.get(Account, account.id)
   end
 end
