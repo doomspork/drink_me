@@ -35,7 +35,6 @@ defmodule DrinkMe.Mixfile do
       {:excoveralls, "~> 0.3", only: [:dev, :test]},
       {:httpotion, "~> 2.0.0"},
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.1"},
-      {:mogrify, "~> 0.1"},
       {:phoenix, "~> 0.12"},
       {:phoenix_ecto, "~> 0.3"},
       {:phoenix_live_reload, "~> 0.3"},
