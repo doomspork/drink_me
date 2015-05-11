@@ -1,6 +1,5 @@
 defmodule DrinkMe.ImageController do
   use DrinkMe.Web, :controller
-
   require HTTPotion
 
   plug :scrub_params, "image" when action in [:create]
@@ -9,7 +8,9 @@ defmodule DrinkMe.ImageController do
   def create(conn, %{"image" => image_params}) do
     case download(image_params["path"]) do
       { :ok, path } ->
-        spawn fn -> modify(path) end
+        Task.start fn -> 
+          modify(path, image_params["changes"]) 
+        end
         render(conn, "show.json", path: path)
       _ ->
         conn
@@ -18,8 +19,14 @@ defmodule DrinkMe.ImageController do
     end
   end
 
-  defp modify(path) do
-    path |> Mogrify.open |> Mogrify.resize("500x500")
+  defp modify(path, changes) do
+    args = mogrify_args path, changes
+    System.cmd "mogrify", args, stderr_to_stdout: true
+  end
+
+  defp mogrify_args(path, changes) do
+    args = Enum.map_join changes, " ", fn {k, v} -> ~s(-#{k} #{v}) end
+    ~w(#{args} #{String.replace(path, " ", "\\ ")})
   end
 
   defp download(path) do
