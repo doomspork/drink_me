@@ -4,8 +4,8 @@ defmodule DrinkMe.Repo.Migrations.CreateAccount do
   def change do
     execute "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\""
 
-    create table(:accounts) do
-      add :api_key, :uuid, null: false, default: fragment("uuid_generate_v4()")
+    create table(:accounts, primary_key: false) do
+      add :id, :uuid, primary_key: true
       add :aws_access_id, :text, null: false
       add :aws_secret_key, :text, null: false
       add :email, :text, null: false

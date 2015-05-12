@@ -1,16 +1,15 @@
 defmodule DrinkMe.Account do
   use DrinkMe.Web, :model
 
+  @primary_key {:id, :uuid, read_after_writes: true}
+
   schema "accounts" do
-    field :api_key, Ecto.UUID, read_after_writes: true
     field :aws_access_id, :string
     field :aws_secret_key, :string
     field :email, :string
 
     timestamps
   end
-
-  before_insert :generate_api_key
 
   @required_fields ~w(aws_access_id aws_secret_key email)
   @optional_fields ~w()
@@ -25,9 +24,4 @@ defmodule DrinkMe.Account do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
-
-  def generate_api_key(changeset) do
-    changeset |> put_change(:api_key, Ecto.UUID.generate)
-  end
-
 end
