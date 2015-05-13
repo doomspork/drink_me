@@ -9,7 +9,6 @@ defmodule DrinkMe.Mixfile do
       compilers: [:phoenix] ++ Mix.compilers,
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      test_coverage: [tool: ExCoveralls],
       deps: deps]
   end
 
@@ -32,13 +31,15 @@ defmodule DrinkMe.Mixfile do
   defp deps do
     [
       {:cowboy, "~> 1.0"},
-      {:excoveralls, "~> 0.3", only: [:dev, :test]},
+      {:erlcloud, git: "https://github.com/gleber/erlcloud", branch: "master"},
       {:httpotion, "~> 2.0.0"},
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.1"},
-      {:phoenix, "~> 0.12"},
-      {:phoenix_ecto, "~> 0.3"},
-      {:phoenix_live_reload, "~> 0.3"},
-      {:postgrex, ">= 0.0.0"}
+      {:jsx, "~> 2.6", override: true},
+      {:phoenix, "~> 0.13"},
+      {:phoenix_ecto, "~> 0.4"},
+      {:phoenix_html, "~> 1.0"},
+      {:phoenix_live_reload, "~> 0.4"},
+      {:postgrex, "~> 0.8"}
     ]
   end
 end
